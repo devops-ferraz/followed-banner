@@ -2,7 +2,7 @@ import * as bcrypt from "bcrypt";
 import { randomUUID } from "node:crypto";
 
 import { UserRepository } from "../../repository/User/user-repository";
-import { User } from "../../models/User/user-model";
+import { User } from "../../models/user-model";
 import { CreateUserInput } from "../../inputs/User/create-user-input";
 import { UpdateUserInput } from "../../inputs/User/update-user-input";
 

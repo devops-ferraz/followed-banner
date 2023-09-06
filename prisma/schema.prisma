@@ -14,11 +14,74 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Device {
+  ALL
+  ANDROID
+  IOS
+}
+
+enum Gender {
+  ALL
+  MASCULINE
+  FEMININE
+  OTHER
+}
+
 model User {
   id        String   @id @default(uuid())
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @default(now()) @map(name: "updated_at")
   name      String
   email     String   @unique
   password  String
+
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @default(now()) @map(name: "updated_at")
+}
+
+model Campaign {
+  id              String    @id @default(uuid())
+  name            String    @map(name: "name")
+  campaignUrl     String    @map(name: "campaign_url")
+  startDate       String    @map(name: "start_date")
+  finalDate       String    @map(name: "final_date")
+  dailyLimit      Float     @map(name: "daily_limit")
+  haveLimitDaily  Boolean   @map(name: "haveLimit_daily")
+  limitCpc        Float     @map(name: "limit_cpc")
+  haveLimitCpc    Boolean   @map(name: "haveLimit_cpc")
+  campaignValue   Float     @map(name: "campaign_value")
+  imagePath       String    @map(name: "image_path")
+  description     String    @map(name: "description")
+  createdAt       DateTime  @default(now()) @map(name: "created_at")
+  updatedAt       DateTime  @default(now()) @map(name: "updated_at")
+
+  audiences CampaignAudience[]
+}
+
+model Audience {
+  id        String   @id @default(uuid())
+  minAge    Int      @map(name: "min_age")
+  maxAge    Int      @map(name: "max_age")
+  minScore  Int      @map(name: "min_score")
+  maxScore  Int      @map(name: "max_score")
+  name      String   @map(name: "name")
+  negative  Boolean  @map(name: "negative")
+  debug     Boolean  @map(name: "debug")
+  device    Device   @map(name: "device")
+  gender    Gender   @map(name: "gender")
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @default(now()) @map(name: "updated_at")
+
+  campaigns CampaignAudience[]
+  
+}
+
+// Tabela intermediária para o relacionamento muitos-para-muitos entre Campaign e Audience
+model CampaignAudience {
+  // id              String      @id @default(uuid())
+  campaign        Campaign      @relation(fields: [idCampaign], references: [id])
+  idCampaign      String        @map(name: "id_campaign")
+
+  audience        Audience      @relation(fields: [idAudience], references: [id])
+  idAudience      String        @map(name: "id_audience")
+  
+  @@id([idCampaign, idAudience]) 
 }
