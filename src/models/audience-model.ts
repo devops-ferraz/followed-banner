@@ -1,4 +1,6 @@
 import { Field, ObjectType } from "type-graphql";
+import { Campaign } from "./campaign-model";
+import { Device, Gender } from "@prisma/client";
 
 @ObjectType()
 export class Audience {
@@ -9,10 +11,10 @@ export class Audience {
   name: string;
 
   @Field()
-  device: string; //TODO Deve ser mapeado para o tipo adequado
+  device: Device;
 
   @Field()
-  gender: string; //TODO Deve ser mapeado para o tipo adequado
+  gender: Gender;
 
   @Field()
   minAge: number;
@@ -31,4 +33,7 @@ export class Audience {
 
   @Field()
   debug: boolean;
+
+  @Field(() => [Campaign])
+  campaigns: Campaign[];
 }

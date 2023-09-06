@@ -1,5 +1,5 @@
 import { UpdateUserInput } from "../../inputs/User/update-user-input";
-import { User } from "../../models/User/user-model";
+import { User } from "../../models/user-model";
 import { prisma } from "../../prisma";
 import { CreateUserData, UserRepository } from "./user-repository";
 

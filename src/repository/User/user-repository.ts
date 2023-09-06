@@ -1,5 +1,5 @@
 import { UpdateUserInput } from "../../inputs/User/update-user-input";
-import { User } from "../../models/User/user-model";
+import { User } from "../../models/user-model";
 
 export interface CreateUserData {
   id: string;

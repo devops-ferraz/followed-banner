@@ -1,6 +1,6 @@
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import { PrismaClient } from "@prisma/client";
-import { User } from "../../models/User/user-model";
+import { User } from "../../models/user-model";
 import { CreateUserInput } from "../../inputs/User/create-user-input";
 import { PrismaUserRepository } from "../../repository/User/prisma-user-repository";
 import { UserService } from "../../services/User/user-services";

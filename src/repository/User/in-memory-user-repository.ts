@@ -1,4 +1,4 @@
-import { User } from "../../models/User/user-model";
+import { User } from "../../models/user-model";
 import { CreateUserData, UpdateUserData, UserRepository } from "./user-repository";
 
 export class InMemoryUserRepository implements UserRepository {
