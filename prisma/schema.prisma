@@ -16,9 +16,40 @@ datasource db {
 
 model User {
   id        String   @id @default(uuid())
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @default(now()) @map(name: "updated_at")
   name      String
   email     String   @unique
   password  String
+
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @default(now()) @map(name: "updated_at")
+}
+
+
+model Audience {
+  id        String   @id @default(uuid())
+  minAge    Int      @map(name: "min_age")    //"IMI"
+  maxAge    Int      @map(name: "max_age")    //"IMA"
+  minScore  Int      @map(name: "min_score")  //"SMI"
+  maxScore  Int      @map(name: "max_score")  //"SMA"
+  name      String                            //@map(name: "NOM")
+  negative  Boolean                           //@map(name: "NEG")
+  debug     Boolean                           //@map(name: "DBG")
+  device    Device                            //@map(name: "APL")
+  gender    Gender                            //@map(name: "GEN")
+  
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @default(now()) @map(name: "updated_at")
+}
+
+enum Device {
+  ALL
+  ANDROID
+  IOS
+}
+
+enum Gender {
+  ALL
+  MASCULINE
+  FEMININE
+  OTHER
 }
